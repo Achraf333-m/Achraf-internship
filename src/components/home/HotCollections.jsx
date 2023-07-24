@@ -5,13 +5,15 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Skeleton from "../UI/Skeleton";
+import Aos from "aos";
+import 'aos/dist/aos.css';
 
 const HotCollections = () => {
   const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(false);
 
   async function getUsers() {
-      setLoading(true);
+    setLoading(true);
     await axios
       .get(
         "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
@@ -21,6 +23,7 @@ const HotCollections = () => {
   }
 
   useEffect(() => {
+    Aos.init({duration:2000})
     getUsers();
   }, []);
 
@@ -41,7 +44,7 @@ const HotCollections = () => {
 
   return (
     <>
-      <section id="section-collections" className="no-bottom">
+      <section data-aos="fade-in" id="section-collections" className="no-bottom">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -53,6 +56,7 @@ const HotCollections = () => {
 
             {userData?.length ? (
               <OwlCarousel
+                data-aos-delay="500"
                 className="owl-theme"
                 items={4}
                 loop

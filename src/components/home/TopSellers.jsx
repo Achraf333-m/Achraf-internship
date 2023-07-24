@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
+import Aos from "aos";
+import 'aos/dist/aos.css';
 
 const TopSellers = () => {
   const [topSellers, setTopSellers] = useState();
@@ -15,6 +17,7 @@ const TopSellers = () => {
 
 
   useEffect(() => {
+    Aos.init({duration:500})
     getTopSellers();
   }, []);
 
@@ -28,7 +31,7 @@ const TopSellers = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="col-md-12">
+          <div data-aos="fade-in" className="col-md-12">
             {topSellers?.length ? (
               <ol className="author_list">
                 {topSellers?.map((seller) => (

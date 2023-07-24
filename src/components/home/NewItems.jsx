@@ -5,6 +5,8 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Skeleton from "../UI/Skeleton";
 import axios from "axios";
+import Aos from "aos";
+import 'aos/dist/aos.css';
 
 
 const NewItems = () => {
@@ -21,6 +23,7 @@ const NewItems = () => {
   };
 
   useEffect(() => {
+    Aos.init({duration:2000})
     getNewItems();
   }, []);
 
@@ -42,7 +45,7 @@ const NewItems = () => {
 
   
   return (
-    <section id="section-items" className="no-bottom">
+    <section data-aos="fade-in" id="section-items" className="no-bottom">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
@@ -52,7 +55,7 @@ const NewItems = () => {
             </div>
           </div>
           {newItems?.length ? (
-            <OwlCarousel loop margin={10} responsive={responsive} nav>
+            <OwlCarousel data-aos-delay="500" loop margin={10} responsive={responsive} nav>
               {newItems.map((item) => (
                 <div className="" key={item.id}>
                   <ExploreNewItem item={item} />
